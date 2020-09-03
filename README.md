@@ -1,9 +1,9 @@
 To recreate demo...
-1. Run minikube
-2. Follow instructions for setting up ArgoCD up to and including login
+1. Run minikube (`minikube start --driver=hyperkit`)
+2. Follow instructions from the [ArgoCD Spike](https://www.notion.so/duffel/ArgoCD-Spike-ff4795979aa64274a22027b80ea4be99) up to and including login
 3. Add Abby's public git repo:
 ```
-argocd repo add git@github.com:abangser/argocd-example.git --ssh-private-key-path ??
+argocd repo add https://github.com/abangser/argocd-examples.git
 ```
 4. Clone repo: `git clone git@github.com:abangser/argocd-example.git`
 5. Manually apply the two application resources:

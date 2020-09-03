@@ -15,5 +15,5 @@ spec:
     server: https://kubernetes.default.svc
   source:
     path: kustomize/base
-    repoURL: git@github.com:abangser/argocd-examples.git
+    repoURL: https://github.com/abangser/argocd-examples.git
     targetRevision: HEAD

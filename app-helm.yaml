@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: demo-deployment
+  name: demo-helm
   namespace: argocd
 spec:
   project: default
@@ -10,6 +10,12 @@ spec:
     namespace: default
     server: https://kubernetes.default.svc
   source:
-    path: k8s/base
+    path: helm/
     repoURL: git@github.com:abangser/argocd-examples.git
     targetRevision: HEAD
+    helm:
+      valueFiles:
+        - values.yaml
+      parameters:
+        - name: tag
+          value: $ARGOCD_APP_REVISION

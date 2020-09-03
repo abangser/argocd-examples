@@ -1,24 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: demo-nginx
+  name: nginx-kustomize
   labels:
-    app: nginx
+    app: nginx-kustomize
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: nginx
+      app: nginx-kustomize
   template:
     metadata:
       labels:
-        app: nginx
+        app: nginx-kustomize
     spec:
       containers:
         - name: nginx
           image: nginx:1.14.2
           ports:
             - containerPort: 80
-          env:
-            - name: COMMIT_SHA
-              value: SET_BY_ARGO

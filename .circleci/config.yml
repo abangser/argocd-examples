@@ -1,15 +1,23 @@
 version: 2.1
 
 orbs:
-  gcp-cli: circleci/gcp-cli@1.8.4
+  docker: circleci/docker@1.4.0
+
+jobs:
+  build-and-push:
+    executor: docker/docker
+    steps:
+      - setup_remote_docker
+      - checkout
+      - docker/check
+      - docker/build:
+          image: abangser/argo-test
+      - docker/push:
+          digest-path: /tmp/digest.txt
+          image: abangser/argo-test
+          tag: $CIRCLE_SHA1
 
 workflows:
-  version: 1
-
-  build:
+  commit:
     jobs:
-      - build
-
-  deploy:
-      jobs:
-        - deploy
+      - build-and-push

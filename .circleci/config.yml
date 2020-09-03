@@ -11,10 +11,10 @@ jobs:
       - checkout
       - docker/check
       - docker/build:
-          image: abangser/argo-test
+          image: abangser/argo-nginx-test
       - docker/push:
           digest-path: /tmp/digest.txt
-          image: abangser/argo-test
+          image: abangser/argo-nginx-test
           tag: $CIRCLE_SHA1
 
 workflows:

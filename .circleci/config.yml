@@ -1,0 +1,15 @@
+version: 2.1
+
+orbs:
+  gcp-cli: circleci/gcp-cli@1.8.4
+
+workflows:
+  version: 1
+
+  build:
+    jobs:
+      - build
+
+  deploy:
+      jobs:
+        - deploy

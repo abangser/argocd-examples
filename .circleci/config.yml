@@ -36,7 +36,7 @@ jobs:
             git config user.email "CircleCI"
             git config user.name "CircleCI"
             git add .
-            git commit -m "Update via CircleCI"
+            git commit -m "Update deployment image tag via CircleCI"
             # Push quietly to prevent showing the token in log
             git push -q https://$GITHUB_NAME:$GITHUB_PERSONAL_TOKEN@github.com/abangser/argocd-examples.git master
           fi
@@ -54,7 +54,7 @@ jobs:
           git config user.email "CircleCI"
           git config user.name "CircleCI"
           git add .
-          git commit -m "Update deployment via CircleCI"
+          git commit -m "Update kustomize image tag via CircleCI"
           if [[ -z $(git diff-index --name-only HEAD --) ]]; then
             exit 0
           else

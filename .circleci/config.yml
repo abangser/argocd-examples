@@ -49,18 +49,15 @@ jobs:
           git clone https://$GITHUB_NAME:$GITHUB_PERSONAL_TOKEN@github.com/abangser/argocd-examples.git /tmp/argocd-examples
           cd /tmp/argocd-examples
           PREVIOUS_COMMIT_SHA=$(git rev-parse @~)
-          PREVIOUS_AUTHOR=$(git log --format='%ae' -1)
-          if [ "$PREVIOUS_AUTHOR" = "CircleCI" ]; then
-            echo "Git tag is already set to last released change"
+          sed --in-place -E 's/(newTag)(.*)/\1: '$PREVIOUS_COMMIT_SHA'/' kustomize-sed/base/kustomization.yml
+          git config credential.helper 'cache --timeout=120'
+          git config user.email "CircleCI"
+          git config user.name "CircleCI"
+          git add .
+          git commit -m "Update deployment via CircleCI"
+          if [[ -z $(git diff-index --name-only HEAD --) ]]; then
             exit 0
           else
-            echo "Setting git tag to previous released change"
-            sed --in-place -E 's/(newTag)(.*)/\1: '$PREVIOUS_COMMIT_SHA'/' kustomize-sed/base/kustomization.yml
-            git config credential.helper 'cache --timeout=120'
-            git config user.email "CircleCI"
-            git config user.name "CircleCI"
-            git add .
-            git commit -m "Update via CircleCI"
             # Push quietly to prevent showing the token in log
             git push -q https://$GITHUB_NAME:$GITHUB_PERSONAL_TOKEN@github.com/abangser/argocd-examples.git master
           fi
@@ -74,21 +71,18 @@ jobs:
           cd /tmp/argocd-examples
           PREVIOUS_COMMIT_SHA=$(git rev-parse @~)
           PREVIOUS_AUTHOR=$(git log --format='%ae' -1)
-          if [ "$PREVIOUS_AUTHOR" = "CircleCI" ]; then
-            echo "Git tag is already set to last released change"
+          kustomize edit set image
+          git config credential.helper 'cache --timeout=120'
+          git config user.email "CircleCI"
+          git config user.name "CircleCI"
+          git add .
+          git commit -m "Update kustomize image tag via CircleCI"
+          if [[ -z $(git diff-index --name-only HEAD --) ]]; then
             exit 0
           else
-            echo "Setting git tag to previous released change"
-            kustomize edit set image
-            git config credential.helper 'cache --timeout=120'
-            git config user.email "CircleCI"
-            git config user.name "CircleCI"
-            git add .
-            git commit -m "Update via CircleCI"
             # Push quietly to prevent showing the token in log
             git push -q https://$GITHUB_NAME:$GITHUB_PERSONAL_TOKEN@github.com/abangser/argocd-examples.git master
           fi
-
 
 workflows:
   commit:

@@ -33,7 +33,7 @@ jobs:
           git config credential.helper 'cache --timeout=120'
           git config user.email "CircleCI"
           git config user.name "CircleCI"
-          git status
+          git diff
 #          git add .
 #          git commit -m "Update via CircleCI"
 #          # Push quietly to prevent showing the token in log

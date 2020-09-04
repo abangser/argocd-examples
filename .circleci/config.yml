@@ -17,7 +17,7 @@ jobs:
           image: abangser/argo-nginx-test
           tag: $CIRCLE_SHA1
 
-  sed-patch-kustomize-deployment-image-tag:
+  sed-patch-both-kustomize-image-tags:
     docker:
       - image: cimg/base:2020.06
     steps:
@@ -31,33 +31,14 @@ jobs:
             exit 0
           else
             echo "Setting git tag to previous released change"
+            ### First patching deployment file (solution 1), then patching kustomize override (solution 2)
             sed --in-place -E 's/(argo-nginx-test)(.*)/\1:'$PREVIOUS_COMMIT_SHA'/' kustomize-sed-deployment/base/deployment.yml
+            sed --in-place -E 's/(newTag)(.*)/\1:'$PREVIOUS_COMMIT_SHA'/' kustomize-sed/base/kustomization.yml
             git config credential.helper 'cache --timeout=120'
             git config user.email "CircleCI"
             git config user.name "CircleCI"
             git add .
-            git commit -m "Update deployment image tag via CircleCI"
-            # Push quietly to prevent showing the token in log
-            git push -q https://$GITHUB_NAME:$GITHUB_PERSONAL_TOKEN@github.com/abangser/argocd-examples.git master
-          fi
-
-  sed-patch-kustomize-image-tag:
-    docker:
-      - image: cimg/base:2020.06
-    steps:
-      - run : |
-          git clone https://$GITHUB_NAME:$GITHUB_PERSONAL_TOKEN@github.com/abangser/argocd-examples.git /tmp/argocd-examples
-          cd /tmp/argocd-examples
-          PREVIOUS_COMMIT_SHA=$(git rev-parse @~)
-          sed --in-place -E 's/(newTag)(.*)/\1:'$PREVIOUS_COMMIT_SHA'/' kustomize-sed/base/kustomization.yml
-          git config credential.helper 'cache --timeout=120'
-          git config user.email "CircleCI"
-          git config user.name "CircleCI"
-          git add .
-          git commit -m "Update kustomize image tag via CircleCI"
-          if [[ -z $(git diff-index --name-only HEAD --) ]]; then
-            exit 0
-          else
+            git commit -m "Update via CircleCI"
             # Push quietly to prevent showing the token in log
             git push -q https://$GITHUB_NAME:$GITHUB_PERSONAL_TOKEN@github.com/abangser/argocd-examples.git master
           fi
@@ -66,5 +47,4 @@ workflows:
   commit:
     jobs:
       - build-and-push
-      - sed-patch-kustomize-deployment-image-tag
-      - sed-patch-kustomize-image-tag
+      - sed-patch-both-kustomize-image-tags

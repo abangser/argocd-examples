@@ -5,4 +5,4 @@ resources:
   - deployment.yml
 images:
   - name: abangser/argo-nginx-test
-    newTag: PREVIOUS_COMMIT_SHA
+    newTag:16586e9a7d422d827a51af78474e2085de4ec38a

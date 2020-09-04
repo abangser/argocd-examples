@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
         - name: nginx
-          image: abangser/argo-nginx-test:PREVIOUS_COMMIT_SHA
+          image: abangser/argo-nginx-test:ffcb88935973a1d3e53cf40fcba5fa05d1dd61e6
           ports:
             - containerPort: 80

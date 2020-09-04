@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
         - name: nginx
-          image: abangser/argo-nginx-test:e0ab7de36b16cf5124387b124bcf317d91d9372f
+          image: abangser/argo-nginx-test:eb961a061380d217026c60d72d0b607b9a215609
           ports:
             - containerPort: 80

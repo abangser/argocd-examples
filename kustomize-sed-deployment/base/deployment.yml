@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx-kustomize-sed
+  name: nginx-kustomize-sed-deployment
   labels:
-    app: nginx-kustomize-sed
+    app: nginx-kustomize-sed-deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: nginx-kustomize-sed
+      app: nginx-kustomize-sed-deployment
   template:
     metadata:
       labels:
-        app: nginx-kustomize-sed
+        app: nginx-kustomize-sed-deployment
     spec:
       containers:
         - name: nginx
-          image: abangser/argo-nginx-test
+          image: abangser/argo-nginx-test:PREVIOUS_COMMIT_SHA
           ports:
             - containerPort: 80

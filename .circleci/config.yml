@@ -27,7 +27,7 @@ jobs:
           git clone https://$GITHUB_NAME:$GITHUB_PERSONAL_TOKEN@github.com/abangser/argocd-examples.git /tmp/argocd-examples
           cd /tmp/argocd-examples
           TAG=$(git rev-parse @~)
-          sed -i 's/\\(argo-nginx-test\\)\\(.*\\)/\\1:'$TAG'/' /tmp/argocd-examples/kustomize/base/deployment.yml
+          sed -i 's/\\(argo-nginx-test\\)\\(.*\\)/\\1:'$TAG'/' kustomize/base/deployment.yml
           git config credential.helper 'cache --timeout=120'
           git config user.email "CircleCI"
           git config user.name "CircleCI"

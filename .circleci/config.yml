@@ -2,6 +2,7 @@ version: 2.1
 
 orbs:
   docker: circleci/docker@1.4.0
+  rnikkei-kustomize: nikkei/rnikkei-kustomize@0.0.2
 
 jobs:
   build-and-push:
@@ -17,12 +18,10 @@ jobs:
           image: abangser/argo-nginx-test
           tag: $CIRCLE_SHA1
 
-  GenerateYAML:
+  sed-patch-kustomize-image-tag:
     docker:
       - image: cimg/base:2020.06
     steps:
-      - attach_workspace:
-          at: /tmp/workspace
       - run : |
           git clone https://$GITHUB_NAME:$GITHUB_PERSONAL_TOKEN@github.com/abangser/argocd-examples.git /tmp/argocd-examples
           cd /tmp/argocd-examples
@@ -43,8 +42,15 @@ jobs:
             git push -q https://$GITHUB_NAME:$GITHUB_PERSONAL_TOKEN@github.com/abangser/argocd-examples.git master
           fi
 
+  edit-set-kustomize-image-tag:
+    steps:
+      - run: |
+          kustomize
+
+
 workflows:
   commit:
     jobs:
       - build-and-push
-      - GenerateYAML
+      - sed-patch-kustomize-image-tag
+      - edit-set-kustomize-image-tag

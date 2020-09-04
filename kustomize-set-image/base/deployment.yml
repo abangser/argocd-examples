@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx-kustomize
+  name: nginx-kustomize-set-image
   labels:
-    app: nginx-kustomize
+    app: nginx-kustomize-set-image
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: nginx-kustomize
+      app: nginx-kustomize-set-image
   template:
     metadata:
       labels:
-        app: nginx-kustomize
+        app: nginx-kustomize-set-image
     spec:
       containers:
         - name: nginx
-          image: abangser/argo-nginx-test:ffcb88935973a1d3e53cf40fcba5fa05d1dd61e6
+          image: abangser/argo-nginx-test:PREVIOUS_COMMIT_SHA
           ports:
             - containerPort: 80

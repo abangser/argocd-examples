@@ -11,3 +11,6 @@ argocd repo add https://github.com/abangser/argocd-examples.git
 kubectl apply -f app-helm.yaml -f app-kustomize.yaml
 ```
 6. Load local ArgoUI at https://127.0.0.1:8080/applications
+
+Expected state:
+Helm will be sync to a healthy state using the [variable parameter](./app-helm.yaml:25) but Kustomize will be unhealthy since there is no docker image tagged "SET_BY_ARGO"

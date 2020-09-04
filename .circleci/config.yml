@@ -29,7 +29,7 @@ jobs:
           git status
           git log -2
           TAG=$(git rev-parse @~)
-          sed 's/\\(argo-nginx-test\\)\\(.*\\)/\\1:'$TAG'/' kustomize/base/deployment.yml
+          sed -E 's/(argo-nginx-test)(.*)/\1:'$TAG'/' kustomize/base/deployment.yml
           git config credential.helper 'cache --timeout=120'
           git config user.email "CircleCI"
           git config user.name "CircleCI"

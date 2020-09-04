@@ -14,3 +14,5 @@ kubectl apply -f app-helm.yaml -f app-kustomize.yaml
 
 Expected state:
 Helm will be sync to a healthy state using the [variable parameter](./app-helm.yaml:25) but Kustomize will be unhealthy since there is no docker image tagged "SET_BY_ARGO"
+
+If you then make a change to the provided scratch file, this will force a new pipeline/docker build.

@@ -5,4 +5,4 @@ resources:
   - deployment.yml
 images:
   - name: abangser/argo-nginx-test
-    newTag: 894c3c7937bfb9f8b11588145c616cde68ac5573
+    newTag: 752d97fda22cd7ec7bae26ff7f099525e0ac8149

@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx-kustomize-set-image
+  name: nginx-kustomize-set-image-cli
   labels:
-    app: nginx-kustomize-set-image
+    app: nginx-kustomize-set-image-cli
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: nginx-kustomize-set-image
+      app: nginx-kustomize-set-image-cli
   template:
     metadata:
       labels:
-        app: nginx-kustomize-set-image
+        app: nginx-kustomize-set-image-cli
     spec:
       containers:
         - name: nginx

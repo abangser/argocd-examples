@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: demo-kustomize-set-image
+  name: demo-kustomize-sed-kustomization
   namespace: argocd
 spec:
   project: default
@@ -14,6 +14,6 @@ spec:
     namespace: default
     server: https://kubernetes.default.svc
   source:
-    path: kustomize-set-image/base
+    path: kustomize-sed-kustomization/base
     repoURL: https://github.com/abangser/argocd-examples.git
     targetRevision: HEAD

@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx-kustomize-sed
+  name: nginx-kustomize-sed-kustomization
   labels:
-    app: nginx-kustomize-sed
+    app: nginx-kustomize-sed-kustomization
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: nginx-kustomize-sed
+      app: nginx-kustomize-sed-kustomization
   template:
     metadata:
       labels:
-        app: nginx-kustomize-sed
+        app: nginx-kustomize-sed-kustomization
     spec:
       containers:
         - name: nginx

@@ -34,7 +34,7 @@ jobs:
             ### First patching deployment file (solution 1)
             sed --in-place -E 's/(argo-nginx-test)(.*)/\1:'$PREVIOUS_COMMIT_SHA'/' kustomize-sed-deployment/base/deployment.yml
             ### second patch kustomize override (solution 2) can be done with `kustomize edit set image :534`
-            sed --in-place -E 's/(newTag)(.*)/\1: '$PREVIOUS_COMMIT_SHA'/' kustomize-sed/base/kustomization.yml
+            sed --in-place -E 's/(newTag)(.*)/\1: '$PREVIOUS_COMMIT_SHA'/' kustomize-sed-kustomization/base/kustomization.yml
             git config credential.helper 'cache --timeout=120'
             git config user.email "CircleCI"
             git config user.name "CircleCI"
@@ -48,4 +48,4 @@ workflows:
   commit:
     jobs:
       - build-and-push
-      - sed-patch-both-kustomize-image-tags
+      # - sed-patch-both-kustomize-image-tags

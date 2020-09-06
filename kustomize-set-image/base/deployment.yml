@@ -5,7 +5,7 @@ metadata:
   labels:
     app: nginx-kustomize-set-image
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: nginx-kustomize-set-image
@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
         - name: nginx
-          image: abangser/argo-nginx-test:PREVIOUS_COMMIT_SHA
+          image: abangser/argo-nginx-test:SET_IN_ARGO
           ports:
             - containerPort: 80

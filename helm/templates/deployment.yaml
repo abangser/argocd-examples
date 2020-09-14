@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
         - name: nginx
-          image: abangser/argo-nginx-test:{{ .Values.tag }}
+          image: abangser/argo-nginx-test:{{ .Values.commit_sha }}
           ports:
             - containerPort: 80

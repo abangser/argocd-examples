@@ -4,15 +4,6 @@ orbs:
   docker: circleci/docker@1.4.0
 
 jobs:
-  test-env-scoping:
-    docker:
-      - image: cimg/base:2020.06
-    steps:
-      - run: |
-          export TEST_ENV=123
-          echo $TEST_ENV
-      - run: echo $TEST_ENV
-
   build-and-push:
     executor: docker/docker
     steps:
@@ -56,6 +47,5 @@ jobs:
 workflows:
   commit:
     jobs:
-      - test-env-scoping
       - build-and-push
       # - sed-patch-both-kustomize-image-tags

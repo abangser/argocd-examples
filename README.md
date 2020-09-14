@@ -39,7 +39,7 @@ To recreate demo...
 
 1. Manually apply the two application resources:
     ```bash
-    kubectl apply -f app-helm.yaml -f app-kustomize.yaml
+    kubectl apply -f app-helm.yaml -f app-kustomize-sed-deployment.yaml -f app-kustomize-sed-kustomization.yaml -f app-kustomize-set-image-cli.yaml
     ```
 
 1. Load local ArgoUI at https://127.0.0.1:8080/applications

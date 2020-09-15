@@ -1,1 +1,3 @@
-from nginx:1.14.2
+from alpine
+
+ENTRYPOINT sleep 30

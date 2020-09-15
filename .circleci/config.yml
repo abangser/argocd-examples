@@ -25,7 +25,7 @@ jobs:
           name: Tag commit as ready for release
           command: |
             git tag -a production -m "releasing commit $CIRCLE_SHA1"
-            git push --force
+            git push --tags --force
 
 workflows:
   commit:

@@ -16,7 +16,7 @@ spec:
   source:
     path: helm/
     repoURL: https://github.com/abangser/argocd-examples.git
-    targetRevision: HEAD
+    targetRevision: production
     helm:
       valueFiles:
         - values.yaml

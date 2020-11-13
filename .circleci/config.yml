@@ -2,8 +2,24 @@ version: 2.1
 
 orbs:
   docker: circleci/docker@1.4.0
+  buildevents: honeycombio/buildevents@0.2.7
+
+executors:
+  go:
+    docker:
+    - image: circleci/golang:1.12
 
 jobs:
+  setup:
+    executor: go
+    steps:
+    - buildevents/start_trace
+
+  watch:
+    executor: go
+    steps:
+    - buildevents/watch_build_and_finish
+
   build-and-push:
     executor: docker/docker
     steps:
@@ -30,6 +46,10 @@ jobs:
 workflows:
   commit:
     jobs:
+      - setup
+      - watch:
+          requires:
+          - setup
       - build-and-push
       - tag-release:
           requires:

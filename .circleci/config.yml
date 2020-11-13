@@ -1,5 +1,9 @@
 version: 2.1
 
+aliases:
+- &global_context
+  - honeycomb
+
 orbs:
   docker: circleci/docker@1.4.0
   buildevents: honeycombio/buildevents@0.2.7
@@ -46,8 +50,10 @@ jobs:
 workflows:
   commit:
     jobs:
-      - setup
+      - setup:
+          context: *global_context
       - watch:
+          context: *global_context
           requires:
           - setup
       - build-and-push

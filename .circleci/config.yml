@@ -60,7 +60,7 @@ workflows:
           context: *global_context
           requires:
           - setup
-      - build-and-push
+      - build-and-push:
           context: *global_context
           requires:
           - setup
